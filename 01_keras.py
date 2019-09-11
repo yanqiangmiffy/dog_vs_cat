@@ -15,7 +15,7 @@ def rmrf_mkdir(dirname):
 
 
 def process():
-    path = 'D:/Project/dog_vs_cats/'
+    path = ''
     train_filenames = os.listdir(path + 'cat_dog/train')
     train_cat = filter(lambda x: x[:3] == 'cat', train_filenames)
     train_dog = filter(lambda x: x[:3] == 'dog', train_filenames)
@@ -53,10 +53,11 @@ def process():
         shutil.copy(path + 'cat_dog/val/' + filename, path + 'valid2/dog/' + filename)
 
 
-# process()
+process()
 # dimensions of our images.
 img_width, img_height = 200, 200
-path = 'D://Project//dog_vs_cats//'
+path = ''
+# path = 'D://Project//dog_vs_cats//'
 train_data_dir = path + 'train2'
 validation_data_dir = path + 'valid2'
 test_data_dir = path + 'test2'
