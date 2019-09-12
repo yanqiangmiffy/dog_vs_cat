@@ -1,5 +1,5 @@
 # https://github.com/ypwhs/dogs_vs_cats
-
+# 未实现
 from keras.models import *
 from keras.layers import *
 from keras.applications import *
@@ -43,6 +43,7 @@ def write_gap(MODEL, image_size, lambda_func=None):
         x = Lambda(lambda_func)(x)
 
     base_model = MODEL(input_tensor=x, weights='imagenet', include_top=False)
+
     model = Model(base_model.input, GlobalAveragePooling2D()(base_model.output))
 
     gen = ImageDataGenerator()
@@ -53,7 +54,7 @@ def write_gap(MODEL, image_size, lambda_func=None):
 
     train = model.predict_generator(train_generator, len(train_generator.filenames), verbose=1)
     test = model.predict_generator(test_generator, len(test_generator.filenames), verbose=1)
-    with h5py.File("gap_%s.h5" % MODEL.func_name) as h:
+    with h5py.File("gap_%s.h5" % str(MODEL)) as h:
         h.create_dataset("train", data=train)
         h.create_dataset("test", data=test)
         h.create_dataset("label", data=train_generator.classes)
